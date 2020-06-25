@@ -99,16 +99,21 @@ var exponent = function(base, exp) {
         return 1;
     }
     if (exp < 0) {
-        return (1/(base * exponent(base, exp + 1)));
+        return (1/(exponent(base, -exp)));
     }
     return base * exponent(base, exp - 1);
 };
-console.log(exponent(4,-2));
+// console.log(exponent(4,-2));
 // 8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+    if (n === 0) {
+        return true;
+    }
+    
+    
 };
 
 // 9. Write a function that reverses a string.
@@ -150,6 +155,7 @@ var gcd = function(x, y) {
 // compareStr('house', 'houses') // false
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
+   
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
@@ -173,14 +179,41 @@ var buildList = function(value, length) {
 // For numbers which are multiples of both three and five, output “FizzBuzz” instead of the number.
 // fizzBuzz(5) // ['1','2','Fizz','4','Buzz']
 var fizzBuzz = function(n) {
-};
+    const result = [];
+    
+    if (n === 1) {
+        return ['1'];
+    }
 
+    if (n % 15 === 0) {
+        result.push('FizzBuzz');
+    }else if (n % 3 === 0) {
+        result.push('Fizz');
+    } else if (n % 5 === 0) {
+        result.push('Buzz');
+    } else {
+        result.push('' + n);
+    }
+    return fizzBuzz(n - 1).concat(result);
+
+    // return result;
+};
+console.log(fizzBuzz(5))
 // 20. Count the occurence of a value in a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
 var countOccurrence = function(array, value) {
+    let count = 0;
+    if (array.length === 0) {
+        return count;
+    }
+    if (array[array.length -1] === value) {
+        count++;
+    }
+    array = array.slice(0, -1);
+    return count + countOccurrence(array, value);
 };
-
+// console.log(countOccurrence([2,'banana',4,4,1,'banana'], 'banana'));
 // 21. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
 var rMap = function(array, callback) {
@@ -299,6 +332,7 @@ var tagCount = function(tag, node) {
 // binarySearch(array, 5) // 5
 // https://www.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search
 var binarySearch = function(array, target, min, max) {
+
 };
 
 // 39. Write a merge sort function.
