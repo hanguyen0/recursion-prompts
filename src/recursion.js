@@ -81,13 +81,19 @@ var sumBelow = function(n) {
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
     let arr = [];
-    if (x === y - 1) {
+    if (x === y - 1 || x === y || x-1 === y) {
         return arr;
     }
-    arr.push(x + 1)
-    return arr.concat(range(x + 1, y));
+    if (x < y) {
+        arr.push(x + 1)
+        return arr.concat(range(x + 1, y));
+    } else if (x > y) {
+        arr.push(x - 1);
+        return arr.concat(range(x - 1, y));
+    }
+
 };
-// console.log(range(2,9));
+// console.log(range(7,2));
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
 // 8^2 = 8 x 8 = 64. Here, 8 is the base and 2 is the exponent.
@@ -109,29 +115,47 @@ var exponent = function(base, exp) {
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
-    if (n === 0) {
+    if (n === 1|| n === 2) {
         return true;
+    } else if (n === 0 || n % 4 !== 0) {
+        return false;
     }
-    
+    return powerOfTwo(n /2);
     
 };
-
+// console.log(powerOfTwo(270))
 // 9. Write a function that reverses a string.
 var reverse = function(string) {
+    let str = '';
+    if (string.length === 0) {
+        return str;
+    }
+    str += string[string.length-1];
+    string = string.slice(0, -1);
+    return str + reverse(string);
 };
-
+// console.log(reverse('hello'));
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
-};
 
+};
+// console.log(palindrome('racecar'));
 // 11. Write a function that returns the remainder of x divided by y without using the
 // modulo (%) operator.
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
+    if (y === 0) {
+        return NaN;
+    } else if (x === 0) {
+        return 0;
+    } else if (x < y) {
+        return x;
+    }
+    return modulo(x - y, y);
 };
-
+console.log(modulo(-78,453));
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
 var multiply = function(x, y) {
@@ -158,11 +182,20 @@ var compareStr = function(str1, str2) {
    
 };
 
-// 16. Write a function that accepts a string and creates an array where each letter
+// 16. Write a function that accepts a string and creates an array 
+//where each letter
 // occupies an index of the array.
+//TODO: fix this
 var createArray = function(str) {
+    let arr = [];
+    if (str.length === 0) {
+        return arr;
+    }
+    arr.concat(str[0])
+    str = str.slice(0+1, str.length-1);
+    return arr.concat(createArray(str));
 };
-
+// console.log(createArray('hi'));
 // 17. Reverse the order of an array
 var reverseArr = function(array) {
 };
@@ -198,7 +231,7 @@ var fizzBuzz = function(n) {
 
     // return result;
 };
-console.log(fizzBuzz(5))
+// console.log(fizzBuzz(5))
 // 20. Count the occurence of a value in a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
